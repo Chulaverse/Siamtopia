@@ -3,110 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siamtopia - MetaKevin Visualization</title>
+    <title>Siamtopia Interface</title>
     <style>
-        body, html {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            background-color: #1c1c1c;
+            background-color: #f0f0f0;
         }
-        #container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-        }
-        .overlay-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        header {
+            background-color: #3498db;
+            padding: 20px;
             text-align: center;
-            color: #fff;
-            font-size: 24px;
-            z-index: 2;
+            color: white;
         }
-        .overlay-text h1 {
-            font-size: 36px;
-            font-weight: bold;
+        #map-placeholder {
+            width: 100%;
+            height: 500px;
+            background-color: #2c3e50;
+            text-align: center;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        footer {
+            background-color: #3498db;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        .menu {
+            margin: 20px;
+            text-align: center;
+        }
+        .menu a {
+            margin: 10px;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <div id="container"></div>
-    <div class="overlay-text">
-        <h1>Welcome to Siamtopia</h1>
-        <p>MetaKevin at the Core of the Universe</p>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // Set up the scene, camera, and renderer
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('container').appendChild(renderer.domElement);
+<header>
+    <h1>Welcome to Siamtopia</h1>
+    <p>Your interactive 3D experience</p>
+</header>
 
-        // Create a sphere for MetaKevin (representing the Core Perception)
-        const geometry = new THREE.SphereGeometry(1, 32, 32);
-        const material = new THREE.MeshBasicMaterial({ color: 0xffff00, wireframe: false });
-        const metaKevinSphere = new THREE.Mesh(geometry, material);
-        scene.add(metaKevinSphere);
+<div id="map-placeholder">
+    <h2>3D Map Placeholder</h2>
+    <p>The map will be displayed here.</p>
+</div>
 
-        // Create orbiting feedback loops (circular elements)
-        const loopMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
-        const loopGeometry1 = new THREE.RingGeometry(2, 2.1, 64);
-        const feedbackLoop1 = new THREE.Mesh(loopGeometry1, loopMaterial);
-        scene.add(feedbackLoop1);
+<div class="menu">
+    <a href="#section1">Explore</a>
+    <a href="#section2">MetaHumans</a>
+    <a href="#section3">Feedback Loop</a>
+</div>
 
-        const loopGeometry2 = new THREE.RingGeometry(3, 3.1, 64);
-        const feedbackLoop2 = new THREE.Mesh(loopGeometry2, loopMaterial);
-        scene.add(feedbackLoop2);
+<footer>
+    <p>&copy; 2024 Siamtopia. All rights reserved.</p>
+</footer>
 
-        // MetaKevin Influence Metahuman Orbits (simplified points or small spheres)
-        const metaHumanGeometry = new THREE.SphereGeometry(0.2, 32, 32);
-        const metaHumanMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const metaHuman1 = new THREE.Mesh(metaHumanGeometry, metaHumanMaterial);
-        metaHuman1.position.set(4, 0, 0);
-        scene.add(metaHuman1);
-
-        const metaHuman2 = new THREE.Mesh(metaHumanGeometry, metaHumanMaterial);
-        metaHuman2.position.set(-4, 0, 0);
-        scene.add(metaHuman2);
-
-        // Set the camera position
-        camera.position.z = 5;
-
-        // Animation loop to rotate MetaKevin and loops
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Rotate MetaKevin (core)
-            metaKevinSphere.rotation.y += 0.01;
-
-            // Rotate feedback loops
-            feedbackLoop1.rotation.z += 0.01;
-            feedbackLoop2.rotation.z += 0.005;
-
-            // Rotate MetaHuman spheres
-            metaHuman1.rotation.y += 0.01;
-            metaHuman2.rotation.y += 0.01;
-
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        // Adjust scene on window resize
-        window.addEventListener('resize', () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-        });
-    </script>
 </body>
 </html>
