@@ -1,127 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Siamtopia</title>
-  <style>
-    /* Styles */
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #1a1a1d;
-      color: white;
-    }
-
-    header {
-      background-color: #2b2b2e;
-      padding: 20px;
-      text-align: center;
-    }
-
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav ul li {
-      display: inline;
-      margin: 0 15px;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-    }
-
-    .landing-page {
-      text-align: center;
-      padding: 50px;
-    }
-
-    .landing-page h1 {
-      font-size: 50px;
-      margin-bottom: 20px;
-      opacity: 0;
-    }
-
-    .map-container {
-      width: 100%;
-      height: 600px;
-      position: relative;
-    }
-
-    .map-placeholder {
-      width: 100%;
-      height: 100%;
-      color: white;
-      font-size: 50px;
-      text-align: center;
-      background-color: #111;
-      padding-top: 200px;
-    }
-
-    .metahuman-section {
-      padding: 50px;
-      background-color: #333;
-    }
-
-    .metahuman-gallery {
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .metahuman-card {
-      background-color: #444;
-      padding: 20px;
-      border-radius: 10px;
-      width: 30%;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .metahuman-card:hover {
-      background-color: #555;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #2b2b2e;
-    }
-  </style>
-</head>
-<body>
-  <!-- Header with Navigation -->
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#explore">Explore Siamtopia</a></li>
-        <li><a href="#metahumans">MetaHuman Profiles</a></li>
-        <li><a href="#events">Live Events</a></li>
-        <li><a href="#rappers-hub">Rappers' Hub</a></li>
-        <li><a href="#blockchain">Blockchain Projects</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Landing Page with 3D Map Placeholder -->
-  <section class="landing-page">
-    <h1>Welcome to Siamtopia</h1>
-    <div class="map-container">
-      <div class="map-placeholder">3D Map Placeholder</div>
-    </div>
-  </section>
-
-  <!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siamtopia 3D Map</title>
+    <title>Siamtopia</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         body { margin: 0; }
@@ -129,12 +11,15 @@
     </style>
 </head>
 <body>
+    <h1>Welcome to Siamtopia</h1>
+    <div id="3d-map"></div>
+    
     <script>
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+        document.getElementById('3d-map').appendChild(renderer.domElement);
 
         const geometry = new THREE.BoxGeometry();
         const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
@@ -151,53 +36,5 @@
         }
         animate();
     </script>
-</body>
-</html>
-  
-  <!-- MetaHuman Profiles Section -->
-  <section id="metahumans" class="metahuman-section">
-    <h2>Meet the MetaHumans</h2>
-    <div class="metahuman-gallery">
-      <div class="metahuman-card" data-name="MetaArkane">
-        <h3>MetaArkane</h3>
-        <p>Master of energy strands and creativity evolution.</p>
-      </div>
-      <div class="metahuman-card" data-name="MetaHallyu">
-        <h3>MetaHallyu</h3>
-        <p>Influencer of South Korea, guiding trends and culture.</p>
-      </div>
-      <div class="metahuman-card" data-name="MetaRyūjin">
-        <h3>MetaRyūjin</h3>
-        <p>Influencer from Japan, bridging ancient wisdom with future technology.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2024 Siamtopia. All rights reserved.</p>
-  </footer>
-
-  <!-- JavaScript for Animations and Interactions -->
-  <script>
-    // Animate the landing page title
-    document.addEventListener("DOMContentLoaded", function() {
-      const title = document.querySelector("h1");
-      let opacity = 0;
-      const fadeIn = setInterval(() => {
-        opacity += 0.05;
-        title.style.opacity = opacity;
-        if (opacity >= 1) clearInterval(fadeIn);
-      }, 50);
-    });
-
-    // Placeholder interaction for MetaHuman profile cards
-    document.querySelectorAll('.metahuman-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const name = card.getAttribute('data-name');
-        alert(`Viewing details for ${name}`);
-      });
-    });
-  </script>
 </body>
 </html>
