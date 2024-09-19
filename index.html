@@ -3,35 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siamtopia Interface</title>
+    <title>Siamtopia 3D Map</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
-<!-- Header Section -->
-<header>
-    <h1>Welcome to Siamtopia</h1>
-    <p>Your Interactive 3D Experience</p>
-</header>
+<!-- Placeholder for 3D map -->
+<div id="3d-map-container"></div>
 
-<!-- Map Placeholder -->
-<section id="map-placeholder" style="width: 100%; height: 500px; background-color: #ccc; text-align: center;">
-    <h2>3D Map Placeholder</h2>
-    <p>The interactive map will appear here.</p>
-</section>
+<!-- Three.js Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+    // Create a scene
+    var scene = new THREE.Scene();
 
-<!-- Navigation Menu -->
-<nav>
-    <ul style="list-style-type: none; text-align: center; padding: 0;">
-        <li style="display: inline; margin: 0 10px;"><a href="#explore">Explore</a></li>
-        <li style="display: inline; margin: 0 10px;"><a href="#metahumans">MetaHumans</a></li>
-        <li style="display: inline; margin: 0 10px;"><a href="#feedback">Feedback Loop</a></li>
-    </ul>
-</nav>
+    // Set up the camera (Field of View, Aspect Ratio, Near, Far)
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-<!-- Footer Section -->
-<footer style="text-align: center; padding: 10px; background-color: #eee;">
-    <p>&copy; 2024 Siamtopia</p>
-</footer>
+    // Create a WebGL renderer
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Create a simple cube to represent a placeholder "3D object"
+    var geometry = new THREE.BoxGeometry();
+    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    var cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    // Position the camera
+    camera.position.z = 5;
+
+    // Animate the scene (basic rotation for visualization)
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // Rotate the cube (simple animation)
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        // Render the scene
+        renderer.render(scene, camera);
+    }
+
+    // Call the animate function
+    animate();
+
+    // Handle window resize
+    window.addEventListener('resize', function () {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    });
+</script>
 
 </body>
 </html>
