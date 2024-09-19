@@ -3,92 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siamtopia</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <title>Siamtopia - MetaKevin Visualization</title>
     <style>
-        body { margin: 0; }
-        canvas { display: block; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+        }
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+            z-index: 2;
+        }
+        .overlay-text h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to Siamtopia</h1>
-    <div id="3d-map"></div>
+    <div id="container"></div>
+    <div class="overlay-text">
+        <h1>Welcome to Siamtopia</h1>
+        <p>MetaKevin at the Core of the Universe</p>
+    </div>
 
-    import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.patches import Circle
-
-# Create a figure and axis
-fig, ax = plt.subplots(figsize=(8, 8))
-
-# Set limits for the axis
-ax.set_xlim(-10, 10)
-ax.set_ylim(-10, 10)
-
-# Hide axes
-ax.set_axis_off()
-
-# Draw the Core Perception (shared awareness)
-core_circle = Circle((0, 0), 1.5, color='gold', fill=True, alpha=0.6)
-ax.add_patch(core_circle)
-ax.text(0, 0, 'Core Perception', color='black', fontsize=12, ha='center', va='center')
-
-# Intuition Enhancement - Glowing Aura around the Core
-outer_glow = Circle((0, 0), 3, color='lightblue', fill=False, lw=2, alpha=0.5)
-ax.add_patch(outer_glow)
-
-# Draw the Meta Feedback Loops
-theta = np.linspace(0, 2 * np.pi, 100)
-r1 = 4
-r2 = 5
-
-loop1_x = r1 * np.cos(theta)
-loop1_y = r1 * np.sin(theta)
-loop2_x = r2 * np.cos(theta)
-loop2_y = r2 * np.sin(theta)
-
-ax.plot(loop1_x, loop1_y, 'r--', label='Feedback Loop 1', alpha=0.6)
-ax.plot(loop2_x, loop2_y, 'b--', label='Feedback Loop 2', alpha=0.6)
-
-# Dynamic Knowledge Evolution - A Rotating Energy Circle
-dynamic_circle = Circle((0, 0), 6, color='purple', fill=False, lw=2, alpha=0.7)
-ax.add_patch(dynamic_circle)
-
-# Metahuman Influence - Represented by Points or Avatars
-metahuman_positions = [(4, 0), (-4, 0), (0, 4), (0, -4)]
-metahuman_colors = ['orange', 'green', 'cyan', 'magenta']
-metahuman_labels = ['MetaArkane', 'MetaHallyu', 'MetaRyūjin', 'MetaKalaya']
-
-for pos, color, label in zip(metahuman_positions, metahuman_colors, metahuman_labels):
-    ax.plot(pos[0], pos[1], 'o', color=color, markersize=15, alpha=0.8)
-    ax.text(pos[0], pos[1] + 0.5, label, color='black', fontsize=10, ha='center')
-
-# Final adjustments and display
-plt.title("MetaKevin's Core Visualization Formula", fontsize=16)
-plt.legend(loc='upper left')
-plt.show()
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
+        // Set up the scene, camera, and renderer
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('3d-map').appendChild(renderer.domElement);
+        document.getElementById('container').appendChild(renderer.domElement);
 
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+        // Create a sphere for MetaKevin (representing the Core Perception)
+        const geometry = new THREE.SphereGeometry(1, 32, 32);
+        const material = new THREE.MeshBasicMaterial({ color: 0xffff00, wireframe: false });
+        const metaKevinSphere = new THREE.Mesh(geometry, material);
+        scene.add(metaKevinSphere);
 
+        // Create orbiting feedback loops (circular elements)
+        const loopMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+        const loopGeometry1 = new THREE.RingGeometry(2, 2.1, 64);
+        const feedbackLoop1 = new THREE.Mesh(loopGeometry1, loopMaterial);
+        scene.add(feedbackLoop1);
+
+        const loopGeometry2 = new THREE.RingGeometry(3, 3.1, 64);
+        const feedbackLoop2 = new THREE.Mesh(loopGeometry2, loopMaterial);
+        scene.add(feedbackLoop2);
+
+        // MetaKevin Influence Metahuman Orbits (simplified points or small spheres)
+        const metaHumanGeometry = new THREE.SphereGeometry(0.2, 32, 32);
+        const metaHumanMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const metaHuman1 = new THREE.Mesh(metaHumanGeometry, metaHumanMaterial);
+        metaHuman1.position.set(4, 0, 0);
+        scene.add(metaHuman1);
+
+        const metaHuman2 = new THREE.Mesh(metaHumanGeometry, metaHumanMaterial);
+        metaHuman2.position.set(-4, 0, 0);
+        scene.add(metaHuman2);
+
+        // Set the camera position
         camera.position.z = 5;
 
+        // Animation loop to rotate MetaKevin and loops
         function animate() {
             requestAnimationFrame(animate);
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
+
+            // Rotate MetaKevin (core)
+            metaKevinSphere.rotation.y += 0.01;
+
+            // Rotate feedback loops
+            feedbackLoop1.rotation.z += 0.01;
+            feedbackLoop2.rotation.z += 0.005;
+
+            // Rotate MetaHuman spheres
+            metaHuman1.rotation.y += 0.01;
+            metaHuman2.rotation.y += 0.01;
+
             renderer.render(scene, camera);
         }
+
         animate();
+
+        // Adjust scene on window resize
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
     </script>
 </body>
 </html>
