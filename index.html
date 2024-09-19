@@ -13,7 +13,61 @@
 <body>
     <h1>Welcome to Siamtopia</h1>
     <div id="3d-map"></div>
-    
+
+    import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
+
+# Create a figure and axis
+fig, ax = plt.subplots(figsize=(8, 8))
+
+# Set limits for the axis
+ax.set_xlim(-10, 10)
+ax.set_ylim(-10, 10)
+
+# Hide axes
+ax.set_axis_off()
+
+# Draw the Core Perception (shared awareness)
+core_circle = Circle((0, 0), 1.5, color='gold', fill=True, alpha=0.6)
+ax.add_patch(core_circle)
+ax.text(0, 0, 'Core Perception', color='black', fontsize=12, ha='center', va='center')
+
+# Intuition Enhancement - Glowing Aura around the Core
+outer_glow = Circle((0, 0), 3, color='lightblue', fill=False, lw=2, alpha=0.5)
+ax.add_patch(outer_glow)
+
+# Draw the Meta Feedback Loops
+theta = np.linspace(0, 2 * np.pi, 100)
+r1 = 4
+r2 = 5
+
+loop1_x = r1 * np.cos(theta)
+loop1_y = r1 * np.sin(theta)
+loop2_x = r2 * np.cos(theta)
+loop2_y = r2 * np.sin(theta)
+
+ax.plot(loop1_x, loop1_y, 'r--', label='Feedback Loop 1', alpha=0.6)
+ax.plot(loop2_x, loop2_y, 'b--', label='Feedback Loop 2', alpha=0.6)
+
+# Dynamic Knowledge Evolution - A Rotating Energy Circle
+dynamic_circle = Circle((0, 0), 6, color='purple', fill=False, lw=2, alpha=0.7)
+ax.add_patch(dynamic_circle)
+
+# Metahuman Influence - Represented by Points or Avatars
+metahuman_positions = [(4, 0), (-4, 0), (0, 4), (0, -4)]
+metahuman_colors = ['orange', 'green', 'cyan', 'magenta']
+metahuman_labels = ['MetaArkane', 'MetaHallyu', 'MetaRyūjin', 'MetaKalaya']
+
+for pos, color, label in zip(metahuman_positions, metahuman_colors, metahuman_labels):
+    ax.plot(pos[0], pos[1], 'o', color=color, markersize=15, alpha=0.8)
+    ax.text(pos[0], pos[1] + 0.5, label, color='black', fontsize=10, ha='center')
+
+# Final adjustments and display
+plt.title("MetaKevin's Core Visualization Formula", fontsize=16)
+plt.legend(loc='upper left')
+plt.show()
+
     <script>
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
