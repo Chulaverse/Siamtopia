@@ -1,46 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siamtopia Interface</title>
+    <meta name="description" content="Siamtopia - A futuristic, energy-driven utopia where MetaHumans thrive.">
+    <title>Siamtopia - A Utopian Energy World</title>
     <style>
-        body { margin: 0; font-family: Arial, sans-serif; }
-        header { text-align: center; padding: 20px; }
-        #3d-map { width: 100%; height: 100vh; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', sans-serif;
+            background: radial-gradient(circle, #1a1a1a, #000);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: rgba(30, 30, 30, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            transition: background-color 0.5s;
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 182, 193, 0.3);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            font-size: 14px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #ff69b4;
+            left: 50%;
+            bottom: 0;
+            transition: width 0.3s, left 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #ff69b4;
+        }
+
+        .language-selector select {
+            background-color: #000;
+            color: #ff69b4;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .hero {
+            height: 100vh;
+            background: radial-gradient(circle, #ff69b4, #ff4081);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            background-attachment: fixed;
+            position: relative;
+            animation: heroFadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: none;
+            animation: fade 1.5s ease-in-out;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slides img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0px 5px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .slides .text {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            font-weight: 300;
+            width: 90%;
+            text-align: center;
+        }
+
+        .hero-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .hero-controls span {
+            font-size: 3em;
+            cursor: pointer;
+            color: #ff69b4;
+            user-select: none;
+            transition: color 0.3s;
+        }
+
+        .hero-controls span:hover {
+            color: #ffffff;
+        }
+
+        .section {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: rgba(255, 182, 193, 0.9);
+            font-weight: 300;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+        }
+
+        footer {
+            background-color: rgba(30, 30, 30, 0.9);
+            padding: 30px;
+            text-align: center;
+            color: rgba(255, 182, 193, 0.9);
+            font-size: 14px;
+            font-weight: 300;
+            box-shadow: 0px -2px 15px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to Siamtopia</h1>
-        <p>Your immersive 3D experience awaits!</p>
+
+    <!-- Header and Navigation -->
+    <header id="header">
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#explore">Explore</a>
+            <a href="#events">Events</a>
+            <a href="#about">About</a>
+        </nav>
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">English</option>
+                <option value="th">ไทย</option>
+                <option value="kr">한국어</option>
+                <option value="zh">中文</option>
+                <option value="jp">日本語</option>
+            </select>
+        </div>
     </header>
-    <div id="3d-map"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Hero Section with Slideshow -->
+    <section class="hero" id="home">
+        <div class="slideshow-container">
+            <!-- Slide 1 -->
+            <div class="slides">
+                <img src="slide1.jpg" alt="MetaHuman and Chula Branding">
+                <div class="text">MetaHuman x Chulalongkorn University</div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slides">
+                <img src="slide2.jpg" alt="Futuristic Cityscape">
+                <div class="text">Explore the Energy City of the Future</div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slides">
+                <img src="slide3.jpg" alt="MetaHuman Branding">
+                <div class="text">Join the Journey of MetaHumans</div>
+            </div>
+
+            <!-- Navigation Arrows -->
+            <div class="hero-controls">
+                <span class="prev" onclick="changeSlide(-1)">&#10094;</span>
+                <span class="next" onclick="changeSlide(1)">&#10095;</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Below -->
+    <section class="section">
+        <h2>Explore Siamtopia</h2>
+        <p>Discover the wonders of Siamtopia and its MetaHumans.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Siamtopia. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for slideshow and language switching -->
     <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('3d-map').appendChild(renderer.domElement);
+        let slideIndex = 0;
+        showSlides();
 
-        // Position the camera
-        camera.position.z = 5;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            // No objects to rotate
-            renderer.render(scene, camera);
+        function showSlides() {
+            let slides = document.getElementsByClassName("slides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 5000); // Change image every 5 seconds
         }
-        animate();
 
-        // Adjust canvas size on window resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+        function changeSlide(n) {
+            slideIndex += n - 1; // Adjust index since it will be incremented again
+            showSlides();
+        }
+
+        // Language selection logic
+        document.getElementById('languageSelect').addEventListener('change', function () {
+            const selectedLanguage = this.value;
+            if (selectedLanguage === 'th') {
+                document.body.lang = 'th';
+            } else if (selectedLanguage === 'kr') {
+                document.body.lang = 'kr';
+            } else if (selectedLanguage === 'zh') {
+                document.body.lang = 'zh';
+            } else if (selectedLanguage === 'jp') {
+                document.body.lang = 'jp';
+            } else {
+                document.body.lang = 'en';
+            }
         });
     </script>
+
 </body>
+
 </html>
